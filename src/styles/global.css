@@ -2,11 +2,15 @@
 
 :root {
 	--link-color: #34D399;
-	--link-hover-color: #99F6E4;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Fira Sans', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 87.5;
 }
 .font-fira {
 	font-family: 'Fira Sans', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
@@ -18,27 +22,35 @@ html, body {
 .font-inter {
   font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
+
+.font-heading {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
 a {
 	text-decoration: none;
 	cursor: pointer;
 		position: relative;
 		display: inline-block;
 		-webkit-tap-highlight-color: transparent;
-		color: var(--link-color);
 		transition: all 200ms ease;
 }
 
-a:hover,
-a:focus {
-  color: var(--link-hover-color);
+a:not([class*="text-red"]):not([class*="text-orange"]):not([class*="text-amber"]):not([class*="text-yellow"]):not([class*="text-lime"]):not([class*="text-green"]):not([class*="text-emerald"]):not([class*="text-teal"]):not([class*="text-cyan"]):not([class*="text-sky"]):not([class*="text-blue"]):not([class*="text-indigo"]):not([class*="text-violet"]):not([class*="text-purple"]):not([class*="text-fuchsia"]):not([class*="text-pink"]):not([class*="text-rose"]):not([class*="text-slate"]):not([class*="text-gray"]):not([class*="text-zinc"]):not([class*="text-neutral"]):not([class*="text-stone"]) {
+  color: var(--link-color);
 }
 
 a::after {
 	content: "";
 	position: absolute;
 	left: 0;
-	bottom: -0.2em;
-	height: 2px;
+	bottom: -0.15em;
+	height: 0.1em;
 	width: 100%;
 	background: currentColor;
 	transform-origin: left;
