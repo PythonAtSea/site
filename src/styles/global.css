@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 :root {
-	--link-color: #34D399;
+	--color-primary: theme('colors.green.300');
+	--color-bg: theme('colors.stone.900');
+	--color-text: theme('colors.teal.50');
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -41,8 +43,8 @@ a {
 		transition: all 200ms ease;
 }
 
-a:not([class*="text-red"]):not([class*="text-orange"]):not([class*="text-amber"]):not([class*="text-yellow"]):not([class*="text-lime"]):not([class*="text-green"]):not([class*="text-emerald"]):not([class*="text-teal"]):not([class*="text-cyan"]):not([class*="text-sky"]):not([class*="text-blue"]):not([class*="text-indigo"]):not([class*="text-violet"]):not([class*="text-purple"]):not([class*="text-fuchsia"]):not([class*="text-pink"]):not([class*="text-rose"]):not([class*="text-slate"]):not([class*="text-gray"]):not([class*="text-zinc"]):not([class*="text-neutral"]):not([class*="text-stone"]) {
-  color: var(--link-color);
+a:where(:not([class*="text-red"]):not([class*="text-orange"]):not([class*="text-amber"]):not([class*="text-yellow"]):not([class*="text-lime"]):not([class*="text-green"]):not([class*="text-emerald"]):not([class*="text-teal"]):not([class*="text-cyan"]):not([class*="text-sky"]):not([class*="text-blue"]):not([class*="text-indigo"]):not([class*="text-violet"]):not([class*="text-purple"]):not([class*="text-fuchsia"]):not([class*="text-pink"]):not([class*="text-rose"]):not([class*="text-slate"]):not([class*="text-gray"]):not([class*="text-zinc"]):not([class*="text-neutral"]):not([class*="text-stone"]):not([class*="text-white"]):not([class*="text-black"])) {
+  color: var(--color-primary);
 }
 
 a::after {
@@ -60,9 +62,20 @@ a::after {
 	pointer-events: none;
 }
 
-a:hover::after,
-a:focus::after {
+a:hover {
+	color: theme('colors.teal.200');
+}
+
+a:hover::after{
 	transform: scaleX(1);
+}
+
+a svg {
+	transition: transform 200ms ease;
+}
+
+a:hover svg {
+	transform: translate(2px, -2px);
 }
 
 @media (prefers-reduced-motion: reduce) {

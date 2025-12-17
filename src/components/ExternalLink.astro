@@ -1,0 +1,18 @@
+---
+import { ArrowUpRight } from "lucide-astro";
+
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={["inline-flex flex-row items-center", className]}
+  ><slot /><ArrowUpRight class="inline w-4 h-4" />
+</a>

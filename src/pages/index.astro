@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ExternalLink from "../components/ExternalLink.astro";
 
 type Status = "online" | "offline" | "dnd" | (string & {});
 
@@ -10,8 +11,8 @@ const statusConfig: Record<
   { bgColor: string; textColor: string; animate: string; text: string }
 > = {
   online: {
-    bgColor: "bg-green-500",
-    textColor: "text-green-500",
+    bgColor: "bg-lime-500",
+    textColor: "text-lime-500",
     animate: "animate-pulse",
     text: "online",
   },
@@ -39,11 +40,11 @@ const currentStatus = statusConfig[status] || {
 
 <Layout>
   <div
-    class="max-w-2xl border-l-4 border-emerald-400 pl-6 flex flex-col space-y-6"
+    class="max-w-2xl border-l-4 border-(--color-primary) pl-6 flex flex-col space-y-6"
   >
     <h1 class="text-4xl font-bold flex flex-row items-center">
       Hey! I'm pythonatsea!<span
-        class={`${currentStatus.animate} ${currentStatus.bgColor} rounded-full inline-block align-middle w-4 h-4 mx-3`}
+        class={`${currentStatus.animate} ${currentStatus.bgColor} rounded-full inline-block align-middle w-3 h-3 mx-3`}
       ></span>
     </h1>
     <h2 class="text-2xl font-semibold">
@@ -53,7 +54,12 @@ const currentStatus = statusConfig[status] || {
     </h2>
     <p>
       I'm a homeschooled high schooler that's <strong>slightly</strong> obessed with
-      robotics, specifically the <i>FIRST</i> Tech Challenge.
+      robotics, specifically the <ExternalLink
+        href="https://www.firstinspires.org/robotics/ftc"
+        ><i>FIRST</i> Tech Challenge</ExternalLink
+      >. Right now I'm on <ExternalLink href="https://ftcscout.org/teams/23521"
+        >team 23521</ExternalLink
+      >.
     </p>
   </div>
 </Layout>
