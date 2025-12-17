@@ -4,9 +4,10 @@ import { ArrowUpRight } from "lucide-astro";
 interface Props {
   href: string;
   class?: string;
+  noIcon?: boolean;
 }
 
-const { href, class: className } = Astro.props;
+const { href, class: className, noIcon } = Astro.props;
 ---
 
 <a
@@ -14,5 +15,5 @@ const { href, class: className } = Astro.props;
   target="_blank"
   rel="noopener noreferrer"
   class:list={["inline-flex flex-row items-center", className]}
-  ><slot /><ArrowUpRight class="inline w-4 h-4" />
+  ><slot />{noIcon ? null : <ArrowUpRight class="inline w-4 h-4" />}
 </a>

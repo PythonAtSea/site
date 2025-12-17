@@ -1,0 +1,78 @@
+---
+import ExternalLink from "./ExternalLink.astro";
+
+const commitSha = import.meta.env.WORKERS_CI_COMMIT_SHA;
+const repoUrl = "https://github.com/PythonAtSea/site";
+
+function getRelativeTime(dateString: string): string {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffSeconds = Math.floor(diffMs / 1000);
+  const diffMinutes = Math.floor(diffSeconds / 60);
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
+  const diffWeeks = Math.floor(diffDays / 7);
+  const diffMonths = Math.floor(diffDays / 30);
+  const diffYears = Math.floor(diffDays / 365);
+
+  if (diffSeconds < 60) return "just now";
+  if (diffMinutes < 60)
+    return `about ${diffMinutes} minute${diffMinutes === 1 ? "" : "s"} ago`;
+  if (diffHours < 24)
+    return `about ${diffHours} hour${diffHours === 1 ? "" : "s"} ago`;
+  if (diffDays < 7)
+    return `about ${diffDays} day${diffDays === 1 ? "" : "s"} ago`;
+  if (diffWeeks < 5)
+    return `about ${diffWeeks} week${diffWeeks === 1 ? "" : "s"} ago`;
+  if (diffMonths < 12)
+    return `about ${diffMonths} month${diffMonths === 1 ? "" : "s"} ago`;
+  return `about ${diffYears} year${diffYears === 1 ? "" : "s"} ago`;
+}
+
+let commitTime: string | null = null;
+if (commitSha) {
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/PythonAtSea/site/commits/${commitSha}`
+    );
+    if (res.ok) {
+      const data = await res.json();
+      commitTime = data.commit?.committer?.date ?? null;
+    }
+  } catch {}
+}
+
+const isCloudflare = !!commitSha;
+const shortSha = commitSha ? commitSha.slice(0, 7) : null;
+const relativeTime = commitTime ? getRelativeTime(commitTime) : null;
+---
+
+<footer
+  class="mt-10 px-10 py-5 border-t border-(--color-text)/20 text-sm text-(--color-text)/60 flex flex-row"
+>
+  {
+    isCloudflare ? (
+      <p>
+        commit{" "}
+        <ExternalLink
+          href={`${repoUrl}/commit/${commitSha}`}
+          noIcon
+          class="font-mono"
+        >
+          {shortSha}
+        </ExternalLink>{" "}
+        from {relativeTime}
+      </p>
+    ) : (
+      <p>
+        commit <span class="font-mono">DEV000</span> from a eternity ago
+      </p>
+    )
+  }
+  <div
+    class={`ml-auto px-1 ${isCloudflare ? "bg-green-900 text-green-100" : "bg-amber-900 text-amber-100"}`}
+  >
+    {isCloudflare ? "PROD" : "DEV"}
+  </div>
+</footer>
