@@ -2,9 +2,7 @@
 import ExternalLink from "./ExternalLink.astro";
 import RelativeTime from "./RelativeTime";
 
-const commitSha =
-  import.meta.env.WORKERS_CI_COMMIT_SHA ||
-  "7ac627267e068b2c45154a26a76f2fbc0e529428";
+const commitSha = import.meta.env.WORKERS_CI_COMMIT_SHA;
 const repoUrl = "https://github.com/PythonAtSea/site";
 
 let commitTime: string | null = null;
