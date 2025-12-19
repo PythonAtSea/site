@@ -45,13 +45,17 @@ const shortSha = commitSha ? commitSha.slice(0, 7) : null;
       </p>
     ) : (
       <p>
-        commit <span class="font-mono">DEV000</span> from a eternity ago
+        commit{" "}
+        <ExternalLink href={`https://guthib.com`} noIcon class="font-mono">
+          DEADBEE
+        </ExternalLink>{" "}
+        from a eternity ago
       </p>
     )
   }
   <div
-    class={`ml-auto px-1 ${isCloudflare ? "bg-green-900 text-green-100" : "bg-amber-900 text-amber-100"}`}
+    class={`ml-auto px-1 ${isCloudflare ? "bg-green-900 text-green-100" : "bg-yellow-900 text-yellow-100"}`}
   >
-    {isCloudflare ? "PROD" : "DEV"}
+    {isCloudflare ? "PRODUCTION" : "DEVELOPMENT"}
   </div>
 </footer>
